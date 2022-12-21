@@ -1,7 +1,6 @@
 import 'package:come_back_flutter_turkish_course/screens/students_page.dart';
 import 'package:come_back_flutter_turkish_course/screens/teacher_page.dart';
 import 'package:flutter/material.dart';
-
 import 'screens/messages_page.dart';
 
 void main() {
@@ -37,6 +36,18 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(color: Colors.blue),
+            child: Text("Öğrenci İsmi"),
+          ),
+          drawerIconButton('Mesajlar', MessagesPage()),
+          drawerIconButton('Öğrenciler Sayfası', StudentsPage()),
+          drawerIconButton('Öğretmenler Sayfası', TeacherPage())
+        ],
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.title),
@@ -50,6 +61,22 @@ class _MyHomePageState extends State<MyHomePage> {
             navigatorTextButton('10 Öğretmen ', TeacherPage())
           ],
         ),
+      ),
+    );
+  }
+
+  ListTile drawerIconButton(String text, Widget widget) {
+    return ListTile(
+      title: MaterialButton(
+        color: Colors.grey,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => widget,
+              ));
+        },
+        child: Text(text),
       ),
     );
   }
