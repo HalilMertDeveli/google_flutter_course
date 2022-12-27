@@ -1,7 +1,9 @@
+import 'package:come_back_flutter_turkish_course/repositories/teacher_repositories.dart';
 import 'package:flutter/material.dart';
 
 class TeacherPage extends StatelessWidget {
-  const TeacherPage({super.key});
+  const TeacherPage({super.key, required this.teacherRepository});
+  final TeacherRepository teacherRepository;
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,6 @@
+import 'package:come_back_flutter_turkish_course/repositories/messages_repositories.dart';
+import 'package:come_back_flutter_turkish_course/repositories/student_repositories.dart';
+import 'package:come_back_flutter_turkish_course/repositories/teacher_repositories.dart';
 import 'package:come_back_flutter_turkish_course/screens/students_page.dart';
 import 'package:come_back_flutter_turkish_course/screens/teacher_page.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +36,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  MesajRepository mesajRepository = new MesajRepository();
+  StudentRepository studentRepository = new StudentRepository();
+  TeacherRepository teacherRepository = new TeacherRepository();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +50,21 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: BoxDecoration(color: Colors.blue),
             child: Text("Öğrenci İsmi"),
           ),
-          drawerIconButton('Mesajlar', MessagesPage()),
-          drawerIconButton('Öğrenciler Sayfası', StudentsPage()),
-          drawerIconButton('Öğretmenler Sayfası', TeacherPage())
+          drawerIconButton(
+              '${mesajRepository.mesajlarListesi.length} Mesajlar',
+              MessagesPage(
+                mesajRepository: mesajRepository,
+              )),
+          drawerIconButton(
+              '${studentRepository.studentsList.length} Yeni öğrenci',
+              StudentsPage(
+                studentRepository: studentRepository,
+              )),
+          drawerIconButton(
+              '${teacherRepository.teachers.length} Öğretmen ',
+              TeacherPage(
+                teacherRepository: teacherRepository,
+              ))
         ],
       ),
       appBar: AppBar(
@@ -56,9 +75,24 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            navigatorTextButton('10 Yeni Mesaj', MessagesPage()),
-            navigatorTextButton('10 Öğrenci', StudentsPage()),
-            navigatorTextButton('10 Öğretmen ', TeacherPage())
+            navigatorTextButton(
+              '${mesajRepository.mesajlarListesi.length} Yeni Mesaj',
+              MessagesPage(
+                mesajRepository: mesajRepository,
+              ),
+            ),
+            navigatorTextButton(
+              '${studentRepository.studentsList.length} Öğrenci',
+              StudentsPage(
+                studentRepository: studentRepository,
+              ),
+            ),
+            navigatorTextButton(
+              '${teacherRepository.teachers.length} Öğretmen ',
+              TeacherPage(
+                teacherRepository: teacherRepository,
+              ),
+            ),
           ],
         ),
       ),
